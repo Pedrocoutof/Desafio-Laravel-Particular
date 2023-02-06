@@ -49,7 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/treino/cadastrar', [TreinoController::class, 'store'])->name('treino.store');
     Route::get('/treino/visualizar/{treinoID}', [TreinoController::class, 'show'])->name('treino.show');
     Route::get('/treino/editar/{treinoID}', [TreinoController::class, 'edit'])->name('treino.edit');
-    Route::post('/treino/editar/{treinoID}', [TreinoController::class, 'update'])->name('treino.update');
+    Route::post('/treino/editar/{treinoID}', [TreinoController::class, 'update'])->name('treino.update');;
+    Route::get('/treino/excluir/{treinoID}', [TreinoController::class, 'destroy'])->name('treino.destroy');
 });
 
 Route::get('/test', function (){return view('test');});

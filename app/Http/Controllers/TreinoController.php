@@ -67,9 +67,9 @@ class TreinoController extends Controller
      * @param  \App\Models\Treino  $treino
      * @return \Illuminate\Http\Response
      */
-    public function edit(Treino $treino)
+    public function edit($treinoID)
     {
-        //
+        return view('treino.edit', ['obj' => Treino::with(['_aluno', '_funcionario'])->findOrFail($treinoID)]);
     }
 
     /**
@@ -79,9 +79,10 @@ class TreinoController extends Controller
      * @param  \App\Models\Treino  $treino
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTreinoRequest $request, Treino $treino)
+    public function update(UpdateTreinoRequest $request, $treinoID)
     {
-        //
+        Treino::findOrFail($treinoID)->update($request->all());
+        return redirect()->route('treinos');
     }
 
     /**
@@ -90,8 +91,9 @@ class TreinoController extends Controller
      * @param  \App\Models\Treino  $treino
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Treino $treino)
+    public function destroy($treinoID)
     {
-        //
+        Treino::destroy($treinoID);
+        return redirect()->route('treinos');
     }
 }
