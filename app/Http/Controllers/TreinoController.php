@@ -56,9 +56,9 @@ class TreinoController extends Controller
      * @param  \App\Models\Treino  $treino
      * @return \Illuminate\Http\Response
      */
-    public function show(Treino $treino)
+    public function show($treinoID)
     {
-        //
+        return view('treino.show', ['obj' => Treino::with(['_aluno', '_funcionario'])->findOrFail($treinoID)]);
     }
 
     /**
