@@ -26,4 +26,8 @@ class Alunos extends Model
         return $this->hasOne(EnderecosAluno::class, 'id');
     }
 
+    public function _treino(){
+        return $this->hasMany(Treino::class, 'id');
+    }
+
 }

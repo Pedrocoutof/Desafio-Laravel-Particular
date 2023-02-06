@@ -30,6 +30,10 @@ class User extends Authenticatable
         return $this->hasOne(EnderecoUser::class, 'id');
     }
 
+    public function _treino(){
+        return $this->hasMany(Treino::class, 'id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
