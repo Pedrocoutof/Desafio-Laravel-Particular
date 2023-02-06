@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alunos;
 use App\Models\Treino;
 use App\Http\Requests\StoreTreinoRequest;
 use App\Http\Requests\UpdateTreinoRequest;
@@ -15,7 +16,7 @@ class TreinoController extends Controller
      */
     public function index()
     {
-        $treino = Treino::all();
+        $treino = Treino::with(['_aluno', '_funcionario'])->get();
         return view('treino.index', ['arrayObj' => $treino]);
     }
 
@@ -26,7 +27,8 @@ class TreinoController extends Controller
      */
     public function create()
     {
-        //
+        $alunos = Alunos::all();
+        return view('treino.create',['alunos' => $alunos]);
     }
 
     /**
@@ -37,7 +39,15 @@ class TreinoController extends Controller
      */
     public function store(StoreTreinoRequest $request)
     {
-        //
+        $treino = Treino::create([
+            'id_funcionario' => $request->funcionario[0],
+            'id_aluno' =>  $request->aluno[0],
+            'inicio' =>  $request->inicio,
+            'fim' => $request->fim,
+            'valor' => $request->valor,
+        ]);
+
+        return redirect()->route('treinos');
     }
 
     /**

@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlunosController;
 use App\Http\Controllers\UserController;
-use App\Models\Treino;
+use App\Http\Controllers\TreinoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +44,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/funcionario/editar/{funcionarioID}', [UserController::class, 'update'])->name('funcionario.update');
     Route::get('/funcionario/excluir/{funcionarioID}', [UserController::class, 'destroy'])->name('funcionario.destroy');
 
-    Route::get('/treino', [Treino::class, 'index'])->name('treinos');
+    Route::get('/treino', [TreinoController::class, 'index'])->name('treinos');
+    Route::get('/treino/cadastrar', [TreinoController::class, 'create'])->name('treino.create');
+    Route::post('/treino/cadastrar', [TreinoController::class, 'store'])->name('treino.store');
 });
 
 Route::get('/test', function (){return view('test');});

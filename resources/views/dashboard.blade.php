@@ -19,6 +19,13 @@
                                     <a href="/aluno/cadastrar" class="btn btn-primary">Cadastrar</a>
                                 </div>
                             </div>
+                            <div class="card my-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Cadastre um novo treino!</h5>
+                                    <div class="py-2"></div>
+                                    <a href="/treino/cadastrar" class="btn btn-primary">Cadastrar</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-9">
                             <div id="calendar"></div>

@@ -32,6 +32,13 @@
                     </x-nav-link>
                 </div>
 
+                <!-- Treinos -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('treinos')" :active="request()->routeIs('treinos')">
+                        {{ __('Treinos') }}
+                    </x-nav-link>
+                </div>
+
             </div>
 
             <!-- Settings Dropdown -->
