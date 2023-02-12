@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Treino;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class TreinoPolicy
 {
@@ -53,7 +54,7 @@ class TreinoPolicy
      */
     public function update(User $user, Treino $treino)
     {
-        //
+        return Auth::user()->is_admin || Auth::user()->id == $treino->id_funcionario;
     }
 
     /**
@@ -65,7 +66,7 @@ class TreinoPolicy
      */
     public function delete(User $user, Treino $treino)
     {
-        //
+        return Auth::user()->is_admin || $treino->id_funcionario == Auth::user()->id;
     }
 
     /**

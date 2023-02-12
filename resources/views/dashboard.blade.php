@@ -26,9 +26,12 @@
                                     <a href="/treino/cadastrar" class="btn btn-primary">Cadastrar</a>
                                 </div>
                             </div>
+
                         </div>
                         <div class="col-sm-9">
-                            <div id="calendar"></div>
+                            
+                            <div id='calendar'></div>
+
                         </div>
                     </div>
 

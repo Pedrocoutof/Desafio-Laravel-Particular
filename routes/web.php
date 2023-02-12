@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/treino/editar/{treinoID}', [TreinoController::class, 'edit'])->name('treino.edit');
     Route::post('/treino/editar/{treinoID}', [TreinoController::class, 'update'])->name('treino.update');;
     Route::get('/treino/excluir/{treinoID}', [TreinoController::class, 'destroy'])->name('treino.destroy');
+    Route::get('/treino/json', [TreinoController::class, 'json'])->name('treino.json');
 });
 
 Route::get('/test', function (){return view('test');});

@@ -31,7 +31,7 @@ class User extends Authenticatable
     }
 
     public function _treino(){
-        return $this->hasMany(Treino::class, 'id');
+        return $this->hasMany(Treino::class, 'id_funcionario');
     }
 
     /**

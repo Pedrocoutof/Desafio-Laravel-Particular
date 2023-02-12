@@ -32,13 +32,20 @@
                                 <tr>
                                     <td>{{$obj->id}}</td>
                                     <td>{{$obj['_aluno']->nome}}</td>
+
                                     <td>{{$obj['_funcionario']->name}}</td>
                                     <td>{{$obj->inicio}}</td>
 
                                     <td>
                                         <a href="/treino/visualizar/{{$obj['id']}}" class="btn btn-primary">visualizar</a>
-                                        <a href="/treino/editar/{{$obj['id']}}" class="btn btn-warning">Editar</a>
-                                        <a href="/treino/excluir/{{$obj['id']}}" class="btn btn-danger">Excluir</a>
+
+                                        @can('update', $obj)
+                                            <a href="/treino/editar/{{$obj['id']}}" class="btn btn-warning">Editar</a>
+                                        @endcan
+
+                                        @can('delete', $obj)
+                                            <a href="/treino/excluir/{{$obj['id']}}" class="btn btn-danger">Excluir</a>
+                                        @endcan
                                     </td>
 
                                 </tr>

@@ -20,10 +20,10 @@ class Treino extends Model
     ];
 
     public function _funcionario(){
-        return $this->hasOne(User::class, 'id');
+        return $this->hasOne(User::class, 'id', 'id_funcionario');
     }
 
     public function _aluno(){
-        return $this->hasOne(Alunos::class, 'id');
+        return $this->hasOne(Alunos::class, 'id', 'id_aluno');
     }
 }

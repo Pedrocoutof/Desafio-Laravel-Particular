@@ -27,7 +27,7 @@ class Alunos extends Model
     }
 
     public function _treino(){
-        return $this->hasMany(Treino::class, 'id');
+        return $this->hasMany(Treino::class, 'id_aluno');
     }
 
 }

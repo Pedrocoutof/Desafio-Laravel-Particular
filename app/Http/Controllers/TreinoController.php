@@ -6,6 +6,7 @@ use App\Models\Alunos;
 use App\Models\Treino;
 use App\Http\Requests\StoreTreinoRequest;
 use App\Http\Requests\UpdateTreinoRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TreinoController extends Controller
 {
@@ -17,6 +18,7 @@ class TreinoController extends Controller
     public function index()
     {
         $treino = Treino::with(['_aluno', '_funcionario'])->get();
+//        dd($treino);
         return view('treino.index', ['arrayObj' => $treino]);
     }
 
@@ -40,8 +42,8 @@ class TreinoController extends Controller
     public function store(StoreTreinoRequest $request)
     {
         $treino = Treino::create([
-            'id_funcionario' => $request->funcionario[0],
-            'id_aluno' =>  $request->aluno[0],
+            'id_funcionario' => explode(" ", $request->funcionario)[0],
+            'id_aluno' =>  explode(" ", $request->aluno)[0],
             'inicio' =>  $request->inicio,
             'fim' => $request->fim,
             'valor' => $request->valor,
@@ -69,6 +71,7 @@ class TreinoController extends Controller
      */
     public function edit($treinoID)
     {
+        $this->authorize('update', Treino::findOrFail($treinoID));
         return view('treino.edit', ['obj' => Treino::with(['_aluno', '_funcionario'])->findOrFail($treinoID)]);
     }
 
@@ -81,7 +84,9 @@ class TreinoController extends Controller
      */
     public function update(UpdateTreinoRequest $request, $treinoID)
     {
-        Treino::findOrFail($treinoID)->update($request->all());
+        $treino = Treino::findOrFail($treinoID);
+        $this->authorize('update', $treino);
+        $treino->update($request->all());
         return redirect()->route('treinos');
     }
 
@@ -93,7 +98,15 @@ class TreinoController extends Controller
      */
     public function destroy($treinoID)
     {
-        Treino::destroy($treinoID);
+        $treino = Treino::findOrFail($treinoID);
+        $this->authorize('delete', $treino);
+        $treino->delete();
+
         return redirect()->route('treinos');
+    }
+
+    public function json(){
+        $treino = Treino::with(['_aluno', '_funcionario'])->get();
+        dd($treino);
     }
 }
