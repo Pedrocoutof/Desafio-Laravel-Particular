@@ -1,29 +1,54 @@
-@include('components.table', [
-    'arraybj' => $arrayObj,
+<x-app-layout>
+    @push('scripts')
+    @endpush
 
-    'titlesTable' => ['#', 'Nome', 'Telefone'],
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Lista de alunos') }}
+        </h2>
+    </x-slot>
 
-    'nameAttributes' => ['id', 'name', 'telefone'],
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
 
-     'primaryKey' => 'id',
+                    <input  class="form-control rounded" type="text" id="inputSearch" onkeyup="searchTable()" placeholder="Pesquisar por nome..">
 
-     'opcoes' => [
-                [
-                  'color' => 'primary',
-                  'name' => 'Visualizar',
-                  'href' => '/funcionario/visualizar/',
-                ],
-                [
-                  'color' => 'warning',
-                  'name' => 'Editar',
-                  'href' => '/funcionario/editar/',
-                ],
+                    <div class="table-responsive my-3">
+                        <table id="tabela" class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Telefone</th>
+                                <th>Opções</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-                [
-                  'color' => 'danger',
-                  'name' => 'Excluir',
-                  'href' => '/funcionario/excluir/',
-                ]
-            ]
+                            @foreach($arrayObj as $obj)
+                                <tr>
+                                    <td>{{$obj['id']}}</td>
+                                    <td>{{$obj['name']}}</td>
+                                    <td>{{$obj['telefone']}}</td>
+                                    <td>
+                                        <a href="/funcionario/visualizar/{{$obj->id}}" class="btn btn-primary">Visualizar</a>
+                                        @can('update', $obj)
+                                            <a href="/funcionario/editar/{{$obj->id}}" class="btn btn-warning">Editar</a>
+                                        @endcan
+                                        @can('delete', $obj)
+                                            <a href="/funcionario/excluir/{{$obj->id}}" class="btn btn-danger">Excluir</a>
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @endforeach
 
-])
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded',function() {
         navLinks: true,
         eventLimit: true,
         selectable: true,
+        eventClick: function(){ return alert('Event Click')},
+        eventDrop: function(){ return alert('Event Drop')},
+        select: function(){ return alert('Event select')},
+
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',

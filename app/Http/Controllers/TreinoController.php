@@ -106,7 +106,17 @@ class TreinoController extends Controller
     }
 
     public function json(){
-        $treino = Treino::with(['_aluno', '_funcionario'])->get();
-        dd($treino);
+        $treino = Treino::query()
+            ->with([
+                '_aluno' => function ($query) {$query->select('id', 'nome');},
+                '_funcionario' => function ($query) {$query->select('id', 'name');}
+                ])
+            ->get();
+
+        $treino = str_replace('inicio', 'start' ,$treino);
+        $treino = str_replace('fim', 'end' ,$treino);
+        $treino = str_replace('nome', 'title' ,$treino);
+
+        return ($treino);
     }
 }

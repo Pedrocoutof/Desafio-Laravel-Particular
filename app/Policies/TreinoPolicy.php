@@ -54,7 +54,7 @@ class TreinoPolicy
      */
     public function update(User $user, Treino $treino)
     {
-        return Auth::user()->is_admin || Auth::user()->id == $treino->id_funcionario;
+        return Auth::user()->is_admin;
     }
 
     /**
@@ -66,7 +66,7 @@ class TreinoPolicy
      */
     public function delete(User $user, Treino $treino)
     {
-        return Auth::user()->is_admin || $treino->id_funcionario == Auth::user()->id;
+        return Auth::user()->is_admin;
     }
 
     /**

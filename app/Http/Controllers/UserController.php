@@ -62,6 +62,7 @@ class UserController extends Controller
     public function edit($funcionarioID)
     {
         $funcionario = User::with('endereco')->findOrFail($funcionarioID);
+        $this->authorize('update', $funcionario);
         return view('funcionario.edit', ['obj' => $funcionario]);
     }
 
@@ -75,6 +76,8 @@ class UserController extends Controller
     public function update(Request $request, $funcionarioID)
     {
         $funcionario = User::findOrFail($funcionarioID);
+        $this->authorize('update', $funcionario);
+
         $funcionario->update($request->all());
 
         $endereco = EnderecoUser::findOrFail($funcionario->endereco);

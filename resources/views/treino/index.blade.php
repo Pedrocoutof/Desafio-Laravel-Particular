@@ -32,7 +32,6 @@
                                 <tr>
                                     <td>{{$obj->id}}</td>
                                     <td>{{$obj['_aluno']->nome}}</td>
-
                                     <td>{{$obj['_funcionario']->name}}</td>
                                     <td>{{$obj->inicio}}</td>
 
