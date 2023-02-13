@@ -115,7 +115,7 @@ class TreinoController extends Controller
 
         $treino = str_replace('inicio', 'start' ,$treino);
         $treino = str_replace('fim', 'end' ,$treino);
-        $treino = str_replace('nome', 'title' ,$treino);
+        $treino = str_replace('id_aluno', 'title' ,$treino);
 
         return ($treino);
     }
